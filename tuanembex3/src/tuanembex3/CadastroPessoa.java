@@ -159,9 +159,9 @@ public class CadastroPessoa extends javax.swing.JFrame {
         String nome = edtNome.getText();
         Double peso = Double.valueOf(edtPeso.getText());
             if(rbFeminino.isSelected()){
-                txtInformacoes.setText("Senhora" + nome + ", você pesa" + peso + "kg.");
+                txtInformacoes.setText("Senhora " + nome + ", você pesa " + peso + " kg.");
             }else{
-                txtInformacoes.setText("Senhor" + nome + ", você pesa" + peso + "kg.");
+                txtInformacoes.setText("Senhor " + nome + ", você pesa " + peso + " kg.");
             }
     }//GEN-LAST:event_btnOkActionPerformed
 
