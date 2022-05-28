@@ -14,7 +14,7 @@ class Conexao {
     String driver = "com.mysql.jdbc.Driver";// Driver para Conexao com banco 
     String banco = "cadaluno"; // Nome do Banco de dados
     String host = "localhost";// servidor de banco de dados
-    String stringDeConexao = "jdbc:mysql://" + host + ":3306" + banco + "?serverTimezone=UTC"; // String de Conexao com o banco de dados
+    String stringDeConexao = "jdbc:mysql://" + host + ":3306/" + banco + "?serverTimezone=UTC"; // String de Conexao com o banco de dados
     String usuario = "root"; //usuario do banco 
     String senha = "1234";// senha de usuario
     

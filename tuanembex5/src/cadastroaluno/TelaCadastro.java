@@ -4,17 +4,25 @@
  */
 package cadastroaluno;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tuane
  */
 public class TelaCadastro extends javax.swing.JFrame {
-
+   
+    AlunoDAO alunoDAO = new AlunoDAO();
     /**
      * Creates new form TelaCadastro
      */
     public TelaCadastro() {
         initComponents();
+        btnEXcluir.setEnabled(false);
+        this.preecherTabela();
     }
 
     /**
@@ -26,24 +34,275 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSexo = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnNovo = new javax.swing.JButton();
+        rbMasculino = new javax.swing.JRadioButton();
+        rbFeminino = new javax.swing.JRadioButton();
+        edtMatricula = new javax.swing.JTextField();
+        edtNome = new javax.swing.JTextField();
+        edtEmail = new javax.swing.JTextField();
+        btnSalvar = new javax.swing.JButton();
+        btnEXcluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaAlunos = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE ALUNOS");
         setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("MATRÍCULA:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("NOME:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("SEXO:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("EMAIL:");
+
+        btnNovo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnNovo.setText("NOVO");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
+        btnSexo.add(rbMasculino);
+        rbMasculino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rbMasculino.setText("MASCULINO");
+
+        btnSexo.add(rbFeminino);
+        rbFeminino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rbFeminino.setText("FEMININO");
+
+        edtMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtMatriculaActionPerformed(evt);
+            }
+        });
+
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalvar.setText("SALVAR");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnEXcluir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnEXcluir.setText("EXCLUIR");
+        btnEXcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEXcluirActionPerformed(evt);
+            }
+        });
+
+        tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "MATRÍCULA", "NOME", "SEXO", "EMAIL"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaAlunos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaAlunosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaAlunos);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rbMasculino)
+                                    .addComponent(rbFeminino)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEXcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(rbMasculino))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbFeminino))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalvar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEXcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 3, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(416, 339));
+        setSize(new java.awt.Dimension(589, 421));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        this.limparCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void edtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtMatriculaActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        if(edtNome.getText().trim().isEmpty()|| edtEmail.getText().trim().isEmpty()||
+                rbMasculino.isSelected() == false && rbFeminino.isSelected() == false ){
+            JOptionPane.showMessageDialog(rootPane,"Preencha todos os campos!");
+                    
+        }else{
+            Aluno aluno = new Aluno();
+            if(!edtMatricula.getText().isEmpty()){
+                aluno.setMatricula(Integer.parseInt(edtMatricula.getText()));
+            }
+            aluno.setNome(edtNome.getText().trim());
+            aluno.setEmail(edtEmail.getText().trim());
+            if(rbMasculino.isSelected()){
+                aluno.setSexo("M");
+            }else{
+                aluno.setSexo("F");
+            }
+            String msg;
+            if(aluno.getMatricula()== 0){
+                msg = alunoDAO.cadastrarAluno(aluno);
+                if(msg.equals("1")){
+                    msg = "Cadastro realizado com sucesso!";
+                }
+                JOptionPane.showMessageDialog(rootPane, msg);
+            }else{
+                msg = alunoDAO.alterarAluno(aluno);
+                if(msg.equals("1")){
+                    msg = "Alteração realizada com sucesso!";
+                JOptionPane.showMessageDialog(rootPane, msg);
+                }
+                this.limparCampos();
+                this.preecherTabela();
+            }
+                    
+                
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+        // TODO add your handling code here:
+        btnEXcluir.setEnabled(true);
+        edtMatricula.setText(tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(),0).toString());
+        edtNome.setText(tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(),1).toString());
+        if(tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(),2).toString().equals("M")){
+            rbMasculino.setSelected(true);
+        }else{
+            rbFeminino.setSelected(true);
+        }
+        edtEmail.setText(tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(),3).toString());
+    }//GEN-LAST:event_tabelaAlunosMouseClicked
+
+    private void btnEXcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXcluirActionPerformed
+        // TODO add your handling code here:
+        
+        int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir o registro?");
+        if(resposta == 0 ){
+            String matricula = edtMatricula.getText();
+            String msg = alunoDAO.excluirAluno(matricula);
+            if(msg.equals("1")){
+                msg = "Exclusão realizada com sucesso!";
+            }
+            JOptionPane.showMessageDialog(rootPane, msg);
+            this.limparCampos();
+            this.preecherTabela();
+        }
+    }//GEN-LAST:event_btnEXcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,5 +340,41 @@ public class TelaCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEXcluir;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.ButtonGroup btnSexo;
+    private javax.swing.JTextField edtEmail;
+    private javax.swing.JTextField edtMatricula;
+    private javax.swing.JTextField edtNome;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rbFeminino;
+    private javax.swing.JRadioButton rbMasculino;
+    private javax.swing.JTable tabelaAlunos;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        edtMatricula.setText("");
+        edtNome.setText("");
+        edtEmail.setText("");
+        btnSexo.clearSelection();
+        btnEXcluir.setEnabled(false);
+    }
+
+    private void preecherTabela() {
+        ArrayList alunos;
+        DefaultTableModel tabela = (DefaultTableModel)tabelaAlunos.getModel();
+        tabela.setRowCount(0);
+        alunos = alunoDAO.listaAlunos();
+        Iterator iterator = alunos.iterator();
+        while(iterator.hasNext()){
+            Aluno aluno = (Aluno)iterator.next();
+            tabela.addRow(new Object[] {aluno.getMatricula(), aluno.getNome(),aluno.getSexo(),aluno.getEmail()});
+        }
+    }
 }

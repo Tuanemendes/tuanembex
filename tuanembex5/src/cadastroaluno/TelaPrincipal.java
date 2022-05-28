@@ -4,6 +4,8 @@
  */
 package cadastroaluno;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tuane
@@ -26,23 +28,100 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuArquivo = new javax.swing.JMenu();
+        menuCadastro = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenuItem();
+        menuSobre = new javax.swing.JMenu();
+        menuSobre1 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE CADASTRO DE ALUNOS");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\1_Faculdade SI\\7º Período\\DEsenvolvimento com Framework\\img-a-escola.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        menuArquivo.setText("Arquivo");
+
+        menuCadastro.setText("Cadastro");
+        menuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(menuCadastro);
+
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(menuSair);
+
+        jMenuBar1.add(menuArquivo);
+
+        menuSobre.setText("Sobre");
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
+
+        menuSobre1.setText("Sobre");
+        menuSobre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobre1ActionPerformed(evt);
+            }
+        });
+        menuSobre.add(menuSobre1);
+
+        jMenuBar1.add(menuSobre);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(416, 339));
+        setSize(new java.awt.Dimension(591, 508));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroActionPerformed
+        // TODO add your handling code here:
+        TelaCadastro tela = new TelaCadastro(); // Cria o formulário de Cadastro
+        tela.show(); // Exibe o formulário de Cadastro.
+    }//GEN-LAST:event_menuCadastroActionPerformed
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void menuSobre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobre1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane,  "SISTEMA DE CADASTRO DE ALUNOS\nDESENVOLVIDO POR TUANE MENDES");
+    }//GEN-LAST:event_menuSobre1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +159,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenuItem menuCadastro;
+    private javax.swing.JMenuItem menuSair;
+    private javax.swing.JMenu menuSobre;
+    private javax.swing.JMenuItem menuSobre1;
     // End of variables declaration//GEN-END:variables
 }
